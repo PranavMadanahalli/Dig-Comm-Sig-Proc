@@ -8,8 +8,6 @@ from bitarray import bitarray
 import zlib
 import wave
 
-print(sys.path)
-
 
 amplitude = 2000
 samplerate = float(1/float(sys.argv[1]))
@@ -53,7 +51,10 @@ def generplay(code):
 
     # play. May repeat with different volume values (if done interactively)
     # stream.write(volume*frames[0])
-x = encoding("abcdef")
+x = encoding("########aaaaaa###############")
+print(len(x))
+print(freq0)
+print(freq1)
 print(x)
 print(decode(x))
 
