@@ -1,8 +1,7 @@
-# modem
-Data transfer over sound waves.
+# Digital Communication
 
-Transfer data between any two devices using only a speaker and a microphone. 
+Transfer data between any two devices using only a speaker and a microphone.
 
-Python3.5
+Python3.7
 
-Need pulsaudio library.
+Need pyaudio and portaudio libraries.

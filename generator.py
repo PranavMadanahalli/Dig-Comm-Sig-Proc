@@ -10,9 +10,10 @@ import wave
 
 
 amplitude = 2000
-samplerate = float(1/float(sys.argv[1]))
-freq0 = 3000
-freq1 = 500
+time = float(1/float(sys.argv[1]))
+filename = sys.argv[2]
+freq0 = 2000
+freq1 = 600
 
 
 def encoding(text, encoding='utf-8', errors='surrogatepass'):
@@ -23,8 +24,6 @@ def decode(bits, encoding='utf-8', errors='surrogatepass'):
     n = int(bits, 2)
     return int2bytes(n).decode(encoding, errors)
 
-
-
 def int2bytes(i):
     hex_string = '%x' % i
     n = len(hex_string)
@@ -32,12 +31,12 @@ def int2bytes(i):
 
 def generplay(code):
     samples = [0, 0]
-    code=code
+
     p = pyaudio.PyAudio()
-    volume = 1    # range [0.0, 1.0]
-    samples[0] =  ((np.sin(np.arange(0,2*math.pi*samplerate*freq0,2*math.pi*freq0/1200))*amplitude).astype(np.float32))
+    volume = 0.5    # range [0.0, 1.0]
+    samples[0] =  ((np.sin(np.arange(0,2*math.pi*time*freq0,2*math.pi*freq0/1200))*amplitude).astype(np.float32))
     samples[0] = samples[0]/(max(np.abs(samples[0])))
-    samples[1] =  (np.sin(np.arange(0,2*math.pi*samplerate*freq1,2*math.pi*freq1/1200))*amplitude).astype(np.float32)
+    samples[1] =  (np.sin(np.arange(0,2*math.pi*time*freq1,2*math.pi*freq1/1200))*amplitude).astype(np.float32)
     samples[1] = samples[1]/(max(np.abs(samples[1])))
 
     # generate samples, note conversion to float32 array
@@ -50,26 +49,9 @@ def generplay(code):
     p.terminate()
 
     # play. May repeat with different volume values (if done interactively)
-    # stream.write(volume*frames[0])
-x = encoding("########aaaaaa###############")
-print(len(x))
-print(freq0)
-print(freq1)
-print(x)
-print(decode(x))
+    # stream.write(volume*frames[0]
 
-generplay(x)
-"""while True:
-	try:
-		input = input()
-	except EOFError:
-		break
-
-	if(input == ""):
-		break
-	else:
-		inputspl = input.split(" ", 2)
-		output = encoding(inputspl[0], inputspl[1], inputspl[2])
-		generplay(output)
-	print("Generating completed.")
-	break"""
+with open(filename, 'r') as file:
+    data = file.read().replace('\n', '')
+    generplay(encoding(data))
+    print("Generating completed.")
