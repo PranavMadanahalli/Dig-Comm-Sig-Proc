@@ -8,8 +8,8 @@ FORMAT = pyaudio.paFloat32
 CHANNELS = 1
 RATE = 1200
 CHUNK = 1024
-RECORD_SECONDS = 14
-WAVE_OUTPUT_FILENAME = "file.wav"
+RECORD_SECONDS = 50
+WAVE_OUTPUT_FILENAME = "file2.wav"
 
 audio = pyaudio.PyAudio()
 

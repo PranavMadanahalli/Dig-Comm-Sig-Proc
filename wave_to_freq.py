@@ -13,7 +13,7 @@ def isSilence(windowPosition):
         return False
 
 
-rate, raw_signal = scipy.io.wavfile.read('file.wav')
+rate, raw_signal = scipy.io.wavfile.read('file1.wav')
 
 rate=len(raw_signal)
 plt.plot(raw_signal)
